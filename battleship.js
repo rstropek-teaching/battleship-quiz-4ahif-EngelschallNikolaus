@@ -26,7 +26,11 @@ $(() => {
     }
     const ships = [5, 4, 3, 3, 2];
     // Here you have to add your code for building a random battleground.
+    // Consider using forEach instead of manual for loop
+    // See also https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
     for (let i = 0; i < ships.length; i++) { //run through all ships
+      // Wouldn't a do...while loop be better in this case?
+      // See also https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while
       var done = false;
       while (!done) { //as long as a ship is not drawn, try to draw it
         var x = randomValue(9, 0);
@@ -38,6 +42,10 @@ $(() => {
 });
 
 function randomValue(upper, lower) {
+  // I think, here you have a mistake in your algorithm. Math.random returns a random number between 0 (inclusive)
+  // and 1 (EXCLUSIVE). Details see https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
+  // You use 9 for `upper`. Because the random number will never be 1, the result can never reach `upper` -> ships will never be
+  // positioned on index 9. This makes playing on your board simpler.
   return Math.floor((Math.random() * upper) + lower);
 }
 function buildShip(x, y, ship) {    //tries to build a ship
