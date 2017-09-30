@@ -28,16 +28,16 @@ $(() => {
     // Here you have to add your code for building a random battleground.
     // Consider using forEach instead of manual for loop
     // See also https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-    for (let i = 0; i < ships.length; i++) { //run through all ships
+    ships.forEach (function(element){ //run through all ships
       // Wouldn't a do...while loop be better in this case?
       // See also https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while
       var done = false;
-      while (!done) { //as long as a ship is not drawn, try to draw it
-        var x = randomValue(9, 0);
-        var y = randomValue(9, 0);
-        done = buildShip(x, y, ships[i]);
-      }
-    }
+      do { //as long as a ship is not drawn, try to draw it
+        var x = randomValue(10, 0);
+        var y = randomValue(10, 0);
+        done = buildShip(x, y, element);
+      }while(!done);
+    });
   });
 });
 
