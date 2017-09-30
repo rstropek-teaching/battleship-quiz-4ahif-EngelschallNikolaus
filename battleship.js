@@ -49,24 +49,39 @@ function randomValue(upper, lower) {
   return Math.floor((Math.random() * upper) + lower);
 }
 function buildShip(x, y, ship) {    //tries to build a ship
-  if (x + ship - 1 < 10 && checkSurroundings(x, y, ship + 1, -1, 0)) {  //create ship horizontal from left to right
-    for (let j = 0; j < ship; j++) {
-      $('td[data-r="' + y + '"][data-c="' + (x + j) + '"]').removeClass('water').addClass('ship');
-    }
-  } else if (x - ship - 1 >= 0 && checkSurroundings(x, y, 2, -ship - 1, 0)) {  //create ship horizontal from right to left
-    for (let j = 0; j < ship; j++) {
-      $('td[data-r="' + y + '"][data-c="' + (x - j) + '"]').removeClass('water').addClass('ship');
-    }
-  } else if (y + ship - 1 < 10 && checkSurroundings(x, y, ship + 1, -1, 1)) { //create ship vertical from top to bottom
-    for (let j = 0; j < ship; j++) {
-      $('td[data-r="' + (y + j) + '"][data-c="' + x + '"]').removeClass('water').addClass('ship');
-    }
-  } else if (y - ship - 1 >= 0 && checkSurroundings(x, y, 2, -ship - 1, 1)) {  //create ship vertical from bottom to top
-    for (let j = 0; j < ship; j++) {
-      $('td[data-r="' + (y - j) + '"][data-c="' + x + '"]').removeClass('water').addClass('ship');
-    }
-  } else {  //ship cannot be placed starting from this point
-    return false;
+  switch(randomValue(4,0)){
+    case 0:
+    if (x + ship - 1 < 10 && checkSurroundings(x, y, ship + 1, -1, 0)) {  //create ship horizontal from left to right
+      for (let j = 0; j < ship; j++) {
+        $('td[data-r="' + y + '"][data-c="' + (x + j) + '"]').removeClass('water').addClass('ship');
+      }
+    }else
+      return false;//try again
+    break;
+    case 1:
+    if (x - ship - 1 >= 0 && checkSurroundings(x, y, 2, -ship - 1, 0)) {  //create ship horizontal from right to left
+      for (let j = 0; j < ship; j++) {
+        $('td[data-r="' + y + '"][data-c="' + (x - j) + '"]').removeClass('water').addClass('ship');
+      }
+    }else
+      return false;//try again
+    break;
+    case 2:
+    if (y + ship - 1 < 10 && checkSurroundings(x, y, ship + 1, -1, 1)) { //create ship vertical from top to bottom
+      for (let j = 0; j < ship; j++) {
+        $('td[data-r="' + (y + j) + '"][data-c="' + x + '"]').removeClass('water').addClass('ship');
+      }
+    }else
+      return false;//try again
+    break;
+    case 3:
+    if (y - ship - 1 >= 0 && checkSurroundings(x, y, 2, -ship - 1, 1)) {  //create ship vertical from bottom to top
+      for (let j = 0; j < ship; j++) {
+        $('td[data-r="' + (y - j) + '"][data-c="' + x + '"]').removeClass('water').addClass('ship');
+      }
+    }else
+      return false;//try again
+    break;
   }
   return true;
 }
